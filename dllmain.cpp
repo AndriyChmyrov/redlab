@@ -160,7 +160,10 @@ int	 mexStartup(void)
 	DaqDeviceDescriptor inventory[MAXNUMDEVS];
 	UDStat = cbGetDaqDeviceInventory(ANY_IFC, inventory, &numberOfDevices);
 #ifndef NDEBUG
-	mexPrintf("%d MeilhausElectronics DAQ found:\n", numberOfDevices);
+	if (numberOfDevices > 0)
+		mexPrintf("%d MeilhausElectronics DAQ%s found:\n", numberOfDevices, static_cast<int>(numberOfDevices), (numberOfDevices == 1) ? "" : "s");
+	else
+		mexPrintf("No MeilhausElectronics DAQ found!\n");
 #endif
 
 	redlabs = numberOfDevices;
@@ -323,7 +326,11 @@ int	 mexStartup(void)
 	}
 
 #ifndef NDEBUG
-	mexPrintf("%d MeilhausElectronics DAQ device%s available.\n", static_cast<int>(redlabs), (redlabs == 1) ? "" : "s");
+	if (redlabs > 0)
+		mexPrintf("%d MeilhausElectronics DAQ device%s available for use.\n", static_cast<int>(redlabs), (redlabs == 1) ? "" : "s");
+	else
+		mexPrintf("No MeilhausElectronics DAQ available for use!\n");
+
 #endif
 
 	return static_cast<int>(redlabs);
