@@ -161,7 +161,7 @@ int	 mexStartup(void)
 	UDStat = cbGetDaqDeviceInventory(ANY_IFC, inventory, &numberOfDevices);
 #ifndef NDEBUG
 	if (numberOfDevices > 0)
-		mexPrintf("%d MeilhausElectronics DAQ%s found:\n", numberOfDevices, static_cast<int>(numberOfDevices), (numberOfDevices == 1) ? "" : "s");
+		mexPrintf("%d MeilhausElectronics DAQ%s found:\n", numberOfDevices, (numberOfDevices == 1) ? "" : "s");
 	else
 		mexPrintf("No MeilhausElectronics DAQ found!\n");
 #endif
