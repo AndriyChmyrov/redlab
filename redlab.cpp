@@ -150,6 +150,9 @@ void setParameter(const char* name, const mxArray* field)
 	int BoardNum = redlabStates[redlab - 1].BoardNum;
 	int numao = redlabStates[redlab - 1].numao;
 	int maxdio = redlabStates[redlab - 1].numdio - 1;
+	if (numao < 0 || maxdio < 0)
+		mexErrMsgTxt("The Redlab DAQ is initialized incorrectly. Please clear and reload the driver!");
+
 
 	if (_stricmp("configureDIO", name) == 0)
 	{
