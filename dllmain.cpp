@@ -111,7 +111,14 @@ void mexCleanup(void)
 			// reset all VOUTs to 0
 			for (int n = 0; n < redlabStates[redlab - 1].numao; n++)
 			{
-				MEXMESSAGE(cbVOut(redlabStates[redlab - 1].BoardNum, n, redlabStates[redlab - 1].range[n], 0, DEFAULTOPTION));
+				try 
+				{
+					MEXMESSAGE(cbVOut(redlabStates[redlab - 1].BoardNum, n, redlabStates[redlab - 1].range[n], 0, DEFAULTOPTION));
+				}
+				catch (...)
+				{
+					mexPrintf("Error occured during setting of the RedLab voltages to zero!\n");
+				}
 			}
 			mxFree(redlabStates[redlab - 1].range);
 			mxFree(redlabStates[redlab - 1].line_out);
